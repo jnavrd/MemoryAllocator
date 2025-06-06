@@ -16,8 +16,7 @@ int main() {
     block.deallocate(ptr);
     block.deallocate(ptr2);
 
-    cout << ptr << endl;
-    cout << ptr2 << endl;
+    //git prueba
 
     block.~PoolAllocator();
 
