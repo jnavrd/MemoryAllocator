@@ -1,0 +1,22 @@
+# CLion/IntelliJ IDEA
+.idea/
+cmake-build-*/
+.cmake/
+
+# Build directories
+build/
+debug/
+release/
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+
+# Object files
+*.o
+*.obj
+
+# Temporary files
+*.tmp
+*.log
