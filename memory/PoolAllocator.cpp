@@ -5,21 +5,15 @@
 #include <cstdlib>
 #include <cstdio>
 
+using namespace std;
+
 #include "PoolAllocator.h"
-
-void PoolAllocator::deallocate(void *ptr) {
-
-    void** freed_slot_pointer = (void**)ptr;
-    *freed_slot_pointer = first_free;
-    first_free = ptr;
-
-}
 
 void *PoolAllocator::allocate() {
 
     if(first_free == nullptr) {
-            std::printf("No hay slots disponibles");
-            return nullptr;
+        printf("No hay slots disponibles");
+        return nullptr;
     }
     void* assigned_slot = first_free;
 
@@ -27,6 +21,19 @@ void *PoolAllocator::allocate() {
     first_free = *current_slot_pointer; //el primer slot disponible, es a donde apunta current_slot_pointer
 
     return assigned_slot;
+}
+
+void PoolAllocator::deallocate(void *ptr) {
+
+    if(ptr == nullptr)
+    {
+        printf("El puntero no es valido");
+        return;
+    }
+    void** freed_slot_pointer = (void**)ptr;
+    *freed_slot_pointer = first_free;
+    first_free = ptr;
+
 }
 
 PoolAllocator::PoolAllocator() {
@@ -53,7 +60,12 @@ PoolAllocator::PoolAllocator() {
 }
 
 PoolAllocator::~PoolAllocator() {
-
+    if (memory_block != nullptr)
+    {
+        free(memory_block);
+        memory_block = nullptr;
+        first_free = nullptr;
+    }
 }
 
 
