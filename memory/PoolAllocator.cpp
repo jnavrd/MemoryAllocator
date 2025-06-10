@@ -31,8 +31,8 @@ void PoolAllocator::deallocate(void *ptr) {
         return;
     }
     void** freed_slot_pointer = (void**)ptr;
-    *freed_slot_pointer = first_free;
-    first_free = ptr;
+    *freed_slot_pointer = first_free; //en el puntero que apunta al siguiente de ptr, guardo first_free
+    first_free = ptr; //first free pasa a ser ptr
 
 }
 
@@ -56,7 +56,6 @@ PoolAllocator::PoolAllocator() {
     *last_slot_pointer = nullptr;
 
     first_free = memory_block; //el primero libre es donde comienza el bloque de memoria
-
 }
 
 PoolAllocator::~PoolAllocator() {
